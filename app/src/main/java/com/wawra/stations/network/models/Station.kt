@@ -34,5 +34,5 @@ data class Station(
     val country: String,
 
     @SerializedName("localised_name")
-    val localisedName: String
+    val localisedName: String?
 )
