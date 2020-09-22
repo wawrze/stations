@@ -32,6 +32,7 @@ class StationRepository @Inject constructor(
         updateStations(),
         updateKeywords()
     ) { result1, result2 -> result1 && result2 }
+        .flatMap { if (it) lastSyncTimeDao.updateLastSync() else Single.just(false) }
 
     private fun updateStations() = api.getStations()
         .onErrorReturn { listOf() }

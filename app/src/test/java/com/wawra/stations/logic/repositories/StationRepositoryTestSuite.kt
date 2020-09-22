@@ -25,6 +25,7 @@ class StationRepositoryTestSuite : BaseTestSuite() {
         val result = objectUnderTest.updateDataIfNeeded().blockingGet()
         // then
         verify { objectUnderTest.lastSyncTimeDao.isSyncNeeded() }
+        verify(exactly = 0) { objectUnderTest.lastSyncTimeDao.updateLastSync() }
         assertTrue(result)
     }
 
@@ -52,6 +53,7 @@ class StationRepositoryTestSuite : BaseTestSuite() {
         verify { objectUnderTest.api.getStations() }
         verify { objectUnderTest.stationDao.updateStations(any()) }
         verify { objectUnderTest.stationDao.updateKeywords(any()) }
+        verify(exactly = 0) { objectUnderTest.lastSyncTimeDao.updateLastSync() }
         assertFalse(result)
         assertEquals(1, keywordsSlot.captured.size)
         assertEquals(0, stationsSlot.captured.size)
@@ -95,6 +97,7 @@ class StationRepositoryTestSuite : BaseTestSuite() {
         verify { objectUnderTest.api.getStations() }
         verify { objectUnderTest.stationDao.updateStations(any()) }
         verify { objectUnderTest.stationDao.updateKeywords(any()) }
+        verify(exactly = 0) { objectUnderTest.lastSyncTimeDao.updateLastSync() }
         assertFalse(result)
         assertEquals(0, keywordsSlot.captured.size)
         assertEquals(1, stationsSlot.captured.size)
@@ -131,6 +134,7 @@ class StationRepositoryTestSuite : BaseTestSuite() {
         every {
             objectUnderTest.stationDao.updateStations(capture(stationsSlot))
         } returns Single.just(true)
+        every { objectUnderTest.lastSyncTimeDao.updateLastSync() } returns Single.just(true)
         val result = objectUnderTest.updateDataIfNeeded().blockingGet()
         // then
         verify { objectUnderTest.lastSyncTimeDao.isSyncNeeded() }
@@ -139,6 +143,7 @@ class StationRepositoryTestSuite : BaseTestSuite() {
         verify { objectUnderTest.api.getStations() }
         verify { objectUnderTest.stationDao.updateStations(any()) }
         verify { objectUnderTest.stationDao.updateKeywords(any()) }
+        verify { objectUnderTest.lastSyncTimeDao.updateLastSync() }
         assertTrue(result)
         assertEquals(1, keywordsSlot.captured.size)
         assertEquals(1, stationsSlot.captured.size)
