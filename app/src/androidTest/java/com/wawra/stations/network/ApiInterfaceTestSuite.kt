@@ -1,8 +1,8 @@
 package com.wawra.stations.network
 
 import com.wawra.stations.BaseNetworkTestSuite
-import com.wawra.stations.network.models.Keyword
-import com.wawra.stations.network.models.Station
+import com.wawra.stations.network.models.KeywordResponse
+import com.wawra.stations.network.models.StationResponse
 import io.reactivex.observers.TestObserver
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -68,7 +68,7 @@ class ApiInterfaceTestSuite : BaseNetworkTestSuite() {
         // when
         mockServer.enqueue(response)
         val observedResponse = objectUnderTest.getStations()
-        val testObserver = TestObserver<List<Station>>()
+        val testObserver = TestObserver<List<StationResponse>>()
         observedResponse.subscribe(testObserver)
         val request = mockServer.takeRequest(1, TimeUnit.SECONDS)
         val result = testObserver.values()[0]
@@ -117,7 +117,7 @@ class ApiInterfaceTestSuite : BaseNetworkTestSuite() {
         // when
         mockServer.enqueue(response)
         val observedResponse = objectUnderTest.getStations()
-        val testObserver = TestObserver<List<Station>>()
+        val testObserver = TestObserver<List<StationResponse>>()
         observedResponse.subscribe(testObserver)
         val request = mockServer.takeRequest(1, TimeUnit.SECONDS)
         val result = testObserver.values()[0]
@@ -138,7 +138,7 @@ class ApiInterfaceTestSuite : BaseNetworkTestSuite() {
         // when
         mockServer.enqueue(response)
         val observedResponse = objectUnderTest.getStations()
-        val testObserver = TestObserver<List<Station>>()
+        val testObserver = TestObserver<List<StationResponse>>()
         observedResponse.subscribe(testObserver)
         val request = mockServer.takeRequest(1, TimeUnit.SECONDS)
         val result = testObserver.values()[0]
@@ -172,7 +172,7 @@ class ApiInterfaceTestSuite : BaseNetworkTestSuite() {
         // when
         mockServer.enqueue(response)
         val observedResponse = objectUnderTest.getKeywords()
-        val testObserver = TestObserver<List<Keyword>>()
+        val testObserver = TestObserver<List<KeywordResponse>>()
         observedResponse.subscribe(testObserver)
         val request = mockServer.takeRequest(1, TimeUnit.SECONDS)
         val result = testObserver.values()[0]
@@ -204,7 +204,7 @@ class ApiInterfaceTestSuite : BaseNetworkTestSuite() {
         // when
         mockServer.enqueue(response)
         val observedResponse = objectUnderTest.getKeywords()
-        val testObserver = TestObserver<List<Keyword>>()
+        val testObserver = TestObserver<List<KeywordResponse>>()
         observedResponse.subscribe(testObserver)
         val request = mockServer.takeRequest(1, TimeUnit.SECONDS)
         val result = testObserver.values()[0]
@@ -225,7 +225,7 @@ class ApiInterfaceTestSuite : BaseNetworkTestSuite() {
         // when
         mockServer.enqueue(response)
         val observedResponse = objectUnderTest.getKeywords()
-        val testObserver = TestObserver<List<Keyword>>()
+        val testObserver = TestObserver<List<KeywordResponse>>()
         observedResponse.subscribe(testObserver)
         val request = mockServer.takeRequest(1, TimeUnit.SECONDS)
         val result = testObserver.values()[0]

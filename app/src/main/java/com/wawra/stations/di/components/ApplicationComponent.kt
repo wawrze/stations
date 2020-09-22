@@ -1,10 +1,7 @@
 package com.wawra.stations.di.components
 
 import com.wawra.stations.App
-import com.wawra.stations.di.modules.DatabaseModule
-import com.wawra.stations.di.modules.FragmentBuilderModule
-import com.wawra.stations.di.modules.RepositoryModule
-import com.wawra.stations.di.modules.ViewModelFactoryModule
+import com.wawra.stations.di.modules.*
 import com.wawra.stations.di.scopes.AppScoped
 import dagger.BindsInstance
 import dagger.Component
@@ -17,6 +14,7 @@ import dagger.android.support.AndroidSupportInjectionModule
         AndroidSupportInjectionModule::class,
         DatabaseModule::class,
         FragmentBuilderModule::class,
+        NetworkModule::class,
         RepositoryModule::class,
         ViewModelFactoryModule::class
     ]

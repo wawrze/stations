@@ -1,8 +1,10 @@
 package com.wawra.stations.di.modules
 
-import com.wawra.stations.database.daos.ModelDao
+import com.wawra.stations.database.daos.LastSyncTimeDao
+import com.wawra.stations.database.daos.StationDao
 import com.wawra.stations.di.scopes.AppScoped
-import com.wawra.stations.logic.ModelRepository
+import com.wawra.stations.logic.StationRepository
+import com.wawra.stations.network.ApiInterface
 import dagger.Module
 import dagger.Provides
 
@@ -11,6 +13,10 @@ class RepositoryModule {
 
     @AppScoped
     @Provides
-    fun provideModelRepository(modelDao: ModelDao): ModelRepository = ModelRepository(modelDao)
+    fun provideModelRepository(
+        stationDao: StationDao,
+        lastSyncDao: LastSyncTimeDao,
+        api: ApiInterface
+    ): StationRepository = StationRepository(stationDao, lastSyncDao, api)
 
 }

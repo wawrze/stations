@@ -2,7 +2,7 @@ package com.wawra.stations.network.models
 
 import com.google.gson.annotations.SerializedName
 
-data class Station(
+data class StationResponse(
     @SerializedName("id")
     val id: Long,
 

@@ -3,7 +3,8 @@ package com.wawra.stations.di.modules
 import androidx.room.Room
 import com.wawra.stations.App
 import com.wawra.stations.database.Database
-import com.wawra.stations.database.daos.ModelDao
+import com.wawra.stations.database.daos.LastSyncTimeDao
+import com.wawra.stations.database.daos.StationDao
 import dagger.Module
 import dagger.Provides
 
@@ -25,6 +26,9 @@ class DatabaseModule {
     }
 
     @Provides
-    fun provideModelDao(database: Database): ModelDao = database.modelDao()
+    fun provideStationDao(database: Database): StationDao = database.stationDao()
+
+    @Provides
+    fun provideLastSyncTimeDao(database: Database): LastSyncTimeDao = database.lastSyncDao()
 
 }
