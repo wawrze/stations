@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit
 class NetworkModule {
 
     companion object {
-        const val BASE_URL = "https://koleo.pl/api/v2/main"
+        const val BASE_URL = "https://koleo.pl/api/v2/main/"
     }
 
     @AppScoped

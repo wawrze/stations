@@ -7,10 +7,10 @@ import retrofit2.http.GET
 
 interface ApiInterface {
 
-    @GET("/stations")
+    @GET("stations")
     fun getStations(): Single<List<StationResponse>>
 
-    @GET("/station_keywords")
+    @GET("station_keywords")
     fun getKeywords(): Single<List<KeywordResponse>>
 
 }

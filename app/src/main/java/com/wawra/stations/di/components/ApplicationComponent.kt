@@ -11,6 +11,7 @@ import dagger.android.support.AndroidSupportInjectionModule
 @AppScoped
 @Component(
     modules = [
+        ActivityBuilderModule::class,
         AndroidSupportInjectionModule::class,
         DatabaseModule::class,
         FragmentBuilderModule::class,
