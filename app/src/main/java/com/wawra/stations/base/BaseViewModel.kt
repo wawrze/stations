@@ -17,4 +17,8 @@ abstract class BaseViewModel : ViewModel() {
         compositeDisposable.add(this)
     }
 
+    fun cancelActions() {
+        compositeDisposable.clear()
+    }
+
 }
