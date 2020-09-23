@@ -1,6 +1,7 @@
 package com.wawra.stations.presentation
 
 import android.os.Bundle
+import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import com.wawra.stations.R
 import com.wawra.stations.base.BaseActivity
@@ -22,6 +23,10 @@ class MainActivity : BaseActivity(), Navigation {
 
     override fun onResume() {
         super.onResume()
+        updateDataIfNeeded()
+    }
+
+    fun updateDataIfNeeded() {
         // TODO: show progress bar
         stationRepository.updateDataIfNeeded()
             .subscribeOn(io())
@@ -30,12 +35,15 @@ class MainActivity : BaseActivity(), Navigation {
                 {
                     // TODO: hide progress bar
                     if (!it) {
-                        // TODO: show error message
+                        getNavigationController().navigate(R.id.dialog_data_out_of_date)
                     }
                 },
                 {
                     // TODO: hide progress bar
-                    // TODO: show error message
+                    getNavigationController().navigate(
+                        R.id.dialog_error,
+                        bundleOf("message" to getString(R.string.unknown_error, 1))
+                    )
                 }
             )
             .addToDisposables()

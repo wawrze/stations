@@ -5,32 +5,32 @@ import androidx.lifecycle.MutableLiveData
 import com.wawra.stations.base.BaseViewModel
 import com.wawra.stations.database.entities.Station
 import com.wawra.stations.logic.calculations.DistanceCalculator
+import com.wawra.stations.logic.exceptions.DataOutOfDateException
 import com.wawra.stations.logic.repositories.StationRepository
 import io.reactivex.android.schedulers.AndroidSchedulers.mainThread
 import io.reactivex.schedulers.Schedulers.computation
 import io.reactivex.schedulers.Schedulers.io
 import javax.inject.Inject
-import kotlin.math.round
 
 class MainViewModel @Inject constructor(var stationRepository: StationRepository) :
     BaseViewModel() {
 
     private val mStations1 = MutableLiveData<List<Station>>()
     private val mStations2 = MutableLiveData<List<Station>>()
-    private val mGetStationsResult = MutableLiveData<Boolean>()
     private val mDistance = MutableLiveData<Double>()
-    private val mGetDistanceResult = MutableLiveData<Boolean>()
+    private val mDataOutOfDateError = MutableLiveData<Boolean>()
+    private val mUnknownError = MutableLiveData<Int>()
 
     val stations1: LiveData<List<Station>>
         get() = mStations1
     val stations2: LiveData<List<Station>>
         get() = mStations2
-    val getStationsResult: LiveData<Boolean>
-        get() = mGetStationsResult
     val distance: LiveData<Double>
         get() = mDistance
-    val getDistanceResult: LiveData<Boolean>
-        get() = mGetDistanceResult
+    val dataOutOfDateError: LiveData<Boolean>
+        get() = mDataOutOfDateError
+    val unknownError: LiveData<Int>
+        get() = mUnknownError
 
     fun getMatchingStations(text: String, forStation1: Boolean) {
         stationRepository.getStationsByKeyword(text)
@@ -38,11 +38,16 @@ class MainViewModel @Inject constructor(var stationRepository: StationRepository
             .observeOn(mainThread())
             .subscribe(
                 {
+                    println(">>>>>>>>>>>> fetched ${it.size} stations")
                     if (forStation1) mStations1.postValue(it) else mStations2.postValue(it)
-                    mGetStationsResult.postValue(true)
                 },
                 {
-                    mGetStationsResult.postValue(false)
+                    println(">>>>>>>>>>>> fetch stations error")
+                    if (it is DataOutOfDateException) {
+                        mDataOutOfDateError.postValue(true)
+                    } else {
+                        mUnknownError.postValue(2)
+                    }
                 }
             )
             .addToDisposables()
@@ -57,14 +62,8 @@ class MainViewModel @Inject constructor(var stationRepository: StationRepository
         ).subscribeOn(computation())
             .observeOn(mainThread())
             .subscribe(
-                {
-                    val rounded = (it * 100).toInt() / 100.0 // TODO: refactor
-                    mDistance.postValue(it)
-                    mGetDistanceResult.postValue(true)
-                },
-                {
-                    mGetDistanceResult.postValue(false)
-                }
+                { mDistance.postValue(it) },
+                { mUnknownError.postValue(3) }
             )
             .addToDisposables()
     }

@@ -83,8 +83,10 @@ class MainFragment : BaseFragment() {
                 override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                     if (forStation1) selectedStation1 = null else selectedStation2 = null
                     bindStationsData()
-                    // TODO: show progress bar
-                    viewModel.getMatchingStations(s.toString(), forStation1)
+                    if (s.toString().length > 1) {
+                        // TODO: show progress bar
+                        viewModel.getMatchingStations(s.toString(), forStation1)
+                    }
                 }
             })
             setOnItemClickListener { _, _, position, _ ->
@@ -109,11 +111,9 @@ class MainFragment : BaseFragment() {
 
         fragment_main_calculate_button.apply {
             if (selectedStation1 != null && selectedStation2 != null) {
-                isEnabled = true
                 setBackgroundResource(R.drawable.bg_button_enabled)
                 context?.let { setTextColor(ContextCompat.getColor(it, R.color.gray_dark)) }
             } else {
-                isEnabled = false
                 setBackgroundResource(R.drawable.bg_button_disabled)
                 context?.let { setTextColor(ContextCompat.getColor(it, R.color.gray_light)) }
                 fragment_main_distance_label.visibility = View.GONE
@@ -124,13 +124,15 @@ class MainFragment : BaseFragment() {
 
     private fun setupButtons() {
         fragment_main_calculate_button.setOnClickListener {
-            if (fragment_main_calculate_button.isEnabled) {
+            if (selectedStation1 != null && selectedStation2 != null) {
                 viewModel.getDistance(
                     selectedStation1 ?: return@setOnClickListener,
                     selectedStation2 ?: return@setOnClickListener
                 )
             } else {
-                // TODO: show error message (choose stations first)
+                navigate?.navigate(
+                    MainFragmentDirections.toDialogError(getString(R.string.choose_stations_error))
+                )
             }
         }
     }
@@ -139,17 +141,30 @@ class MainFragment : BaseFragment() {
         viewModel.stations1.observe {
             station1Adapter.clear()
             station1Adapter.addAll(it)
+            // todo: hide progress bar
         }
         viewModel.stations2.observe {
             station2Adapter.clear()
             station2Adapter.addAll(it)
+            // todo: hide progress bar
         }
         viewModel.distance.observe {
             fragment_main_distance_value.text = getString(R.string.distance_value, it)
             fragment_main_distance_label.visibility = View.VISIBLE
             fragment_main_distance_value.visibility = View.VISIBLE
         }
-        // TODO: observe results, hide progress bar, show error message if needed
+        viewModel.dataOutOfDateError.observe {
+            // todo: hide progress bar
+            navigate?.navigate(
+                MainFragmentDirections.toDialogDataOutOfDate()
+            )
+        }
+        viewModel.unknownError.observe {
+            // todo: hide progress bar
+            navigate?.navigate(
+                MainFragmentDirections.toDialogError(getString(R.string.unknown_error, it))
+            )
+        }
     }
 
     private fun closeKeyboard() {

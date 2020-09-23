@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="button_corner_radius">2dp</dimen>
-    <dimen name="dialog_corner_radius">5dp</dimen>
     <dimen name="divider_size">2dp</dimen>
+
+    <dimen name="dialog_corner_radius">5dp</dimen>
+    <dimen name="dialog_margin">50dp</dimen>
 
     <dimen name="button_height">40dp</dimen>
     <dimen name="button_width">100dp</dimen>

@@ -12,4 +12,10 @@
     <string name="calculate_distance">Calculate distance</string>
     <string name="distance_between_stations">Distance between stations:</string>
     <string name="distance_value">%.2f KM</string>
+    <string name="data_out_of_date_error">The data in the application is out of date! Check Internet connection and try again…</string>
+    <string name="retry">Retry</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+    <string name="choose_stations_error">Pick stations first!</string>
+    <string name="unknown_error">An unknown error has occurred! Error code: %d</string>
 </resources>
