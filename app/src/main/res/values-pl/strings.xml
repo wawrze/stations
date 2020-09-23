@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Stations</string>
+    <string name="app_name">Stacje</string>
 
     <string name="start_typing_and_choose_from_list">Wpisz część nazwy i wybierz stację z listy…</string>
     <string name="station_1">Stacja 1:</string>
