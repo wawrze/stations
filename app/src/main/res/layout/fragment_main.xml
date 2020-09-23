@@ -1,16 +1,388 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/green">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="HELLO WORLD!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:padding="@dimen/margin_large">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/fragment_main_guideline"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <TextView
+            android:id="@+id/fragment_main_station_1_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="@dimen/margin_small"
+            android:text="@string/station_1"
+            android:textColor="@color/gray_light"
+            android:textSize="@dimen/text_large"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/fragment_main_change_station_button_1"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/button_height"
+            android:layout_marginTop="@dimen/margin_large"
+            android:background="@drawable/bg_button_enabled"
+            android:minWidth="@dimen/button_width"
+            android:paddingHorizontal="@dimen/margin_small"
+            android:text="@string/change"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="@color/gray_dark"
+            android:textSize="@dimen/text_small"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_main_station_1_header"
+            tools:visibility="visible" />
+
+        <AutoCompleteTextView
+            android:id="@+id/fragment_main_station_input_1"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/button_height"
+            android:layout_margin="@dimen/margin_large"
+            android:background="@drawable/bg_input"
+            android:hint="@string/start_typing_and_choose_from_list"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:lines="1"
+            android:textAlignment="center"
+            android:textColor="@color/gray_light"
+            android:textSize="@dimen/text_small"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_main_station_1_header" />
+
+        <TextView
+            android:id="@+id/fragment_main_station_1_name_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_regular"
+            android:padding="@dimen/margin_small"
+            android:text="@string/name"
+            android:textColor="@color/gray_light"
+            android:textSize="@dimen/text_regular"
+            app:layout_constraintEnd_toEndOf="@id/fragment_main_station_1_region_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_main_station_input_1" />
+
+        <TextView
+            android:id="@+id/fragment_main_station_1_name_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin_small"
+            android:textColor="@color/blue_light"
+            android:textSize="@dimen/text_regular"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/fragment_main_station_1_name_label"
+            app:layout_constraintTop_toTopOf="@id/fragment_main_station_1_name_label"
+            tools:text="Station name" />
+
+        <TextView
+            android:id="@+id/fragment_main_station_1_city_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin_small"
+            android:text="@string/city"
+            android:textColor="@color/gray_light"
+            android:textSize="@dimen/text_regular"
+            app:layout_constraintEnd_toEndOf="@id/fragment_main_station_1_region_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_main_station_1_name_value" />
+
+        <TextView
+            android:id="@+id/fragment_main_station_1_city_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin_small"
+            android:textColor="@color/blue_light"
+            android:textSize="@dimen/text_regular"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/fragment_main_station_1_city_label"
+            app:layout_constraintTop_toTopOf="@id/fragment_main_station_1_city_label"
+            tools:text="City" />
+
+        <TextView
+            android:id="@+id/fragment_main_station_1_region_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin_small"
+            android:text="@string/region"
+            android:textColor="@color/gray_light"
+            android:textSize="@dimen/text_regular"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_main_station_1_city_value" />
+
+        <TextView
+            android:id="@+id/fragment_main_station_1_region_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:padding="@dimen/margin_small"
+            android:textColor="@color/blue_light"
+            android:textSize="@dimen/text_regular"
+            app:layout_constraintEnd_toEndOf="@id/fragment_main_guideline"
+            app:layout_constraintStart_toEndOf="@id/fragment_main_station_1_region_label"
+            app:layout_constraintTop_toTopOf="@id/fragment_main_station_1_region_label"
+            tools:text="Region" />
+
+        <TextView
+            android:id="@+id/fragment_main_station_1_country_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin_small"
+            android:text="@string/country"
+            android:textColor="@color/gray_light"
+            android:textSize="@dimen/text_regular"
+            app:layout_constraintBottom_toBottomOf="@id/fragment_main_station_1_region_label"
+            app:layout_constraintStart_toStartOf="@id/fragment_main_guideline"
+            app:layout_constraintTop_toTopOf="@id/fragment_main_station_1_region_label" />
+
+        <TextView
+            android:id="@+id/fragment_main_station_1_country_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_small"
+            android:padding="@dimen/margin_small"
+            android:textColor="@color/blue_light"
+            android:textSize="@dimen/text_regular"
+            app:layout_constraintBottom_toBottomOf="@id/fragment_main_station_1_country_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/fragment_main_station_1_country_label"
+            app:layout_constraintTop_toTopOf="@id/fragment_main_station_1_country_label"
+            tools:text="Country" />
+
+        <View
+            android:id="@+id/fragment_statistics_divider_1"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/divider_size"
+            android:layout_marginTop="@dimen/margin_large"
+            android:background="@color/yellow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_main_station_1_region_label" />
+
+        <TextView
+            android:id="@+id/fragment_main_station_2_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_large"
+            android:gravity="center_vertical"
+            android:padding="@dimen/margin_small"
+            android:text="@string/station_2"
+            android:textColor="@color/gray_light"
+            android:textSize="@dimen/text_large"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_statistics_divider_1" />
+
+        <Button
+            android:id="@+id/fragment_main_change_station_button_2"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/button_height"
+            android:layout_marginTop="@dimen/margin_large"
+            android:background="@drawable/bg_button_enabled"
+            android:minWidth="@dimen/button_width"
+            android:paddingHorizontal="@dimen/margin_small"
+            android:text="@string/change"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="@color/gray_dark"
+            android:textSize="@dimen/text_small"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_main_station_2_header"
+            tools:visibility="visible" />
+
+        <AutoCompleteTextView
+            android:id="@+id/fragment_main_station_input_2"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/button_height"
+            android:layout_margin="@dimen/margin_large"
+            android:background="@drawable/bg_input"
+            android:hint="@string/start_typing_and_choose_from_list"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:lines="1"
+            android:textAlignment="center"
+            android:textColor="@color/gray_light"
+            android:textSize="@dimen/text_small"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_main_station_2_header" />
+
+        <TextView
+            android:id="@+id/fragment_main_station_2_name_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_regular"
+            android:padding="@dimen/margin_small"
+            android:text="@string/name"
+            android:textColor="@color/gray_light"
+            android:textSize="@dimen/text_regular"
+            app:layout_constraintEnd_toEndOf="@id/fragment_main_station_2_region_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_main_station_input_2" />
+
+        <TextView
+            android:id="@+id/fragment_main_station_2_name_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin_small"
+            android:textColor="@color/blue_light"
+            android:textSize="@dimen/text_regular"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/fragment_main_station_2_name_label"
+            app:layout_constraintTop_toTopOf="@id/fragment_main_station_2_name_label"
+            tools:text="Station name" />
+
+        <TextView
+            android:id="@+id/fragment_main_station_2_city_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin_small"
+            android:text="@string/city"
+            android:textColor="@color/gray_light"
+            android:textSize="@dimen/text_regular"
+            app:layout_constraintEnd_toEndOf="@id/fragment_main_station_2_region_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_main_station_2_name_value" />
+
+        <TextView
+            android:id="@+id/fragment_main_station_2_city_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin_small"
+            android:textColor="@color/blue_light"
+            android:textSize="@dimen/text_regular"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/fragment_main_station_2_city_label"
+            app:layout_constraintTop_toTopOf="@id/fragment_main_station_2_city_label"
+            tools:text="City" />
+
+        <TextView
+            android:id="@+id/fragment_main_station_2_region_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin_small"
+            android:text="@string/region"
+            android:textColor="@color/gray_light"
+            android:textSize="@dimen/text_regular"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_main_station_2_city_value" />
+
+        <TextView
+            android:id="@+id/fragment_main_station_2_region_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:padding="@dimen/margin_small"
+            android:textColor="@color/blue_light"
+            android:textSize="@dimen/text_regular"
+            app:layout_constraintEnd_toEndOf="@id/fragment_main_guideline"
+            app:layout_constraintStart_toEndOf="@id/fragment_main_station_2_region_label"
+            app:layout_constraintTop_toTopOf="@id/fragment_main_station_2_region_label"
+            tools:text="Region" />
+
+        <TextView
+            android:id="@+id/fragment_main_station_2_country_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin_small"
+            android:text="@string/country"
+            android:textColor="@color/gray_light"
+            android:textSize="@dimen/text_regular"
+            app:layout_constraintBottom_toBottomOf="@id/fragment_main_station_2_region_label"
+            app:layout_constraintStart_toStartOf="@id/fragment_main_guideline"
+            app:layout_constraintTop_toTopOf="@id/fragment_main_station_2_region_label" />
+
+        <TextView
+            android:id="@+id/fragment_main_station_2_country_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_small"
+            android:padding="@dimen/margin_small"
+            android:textColor="@color/blue_light"
+            android:textSize="@dimen/text_regular"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/fragment_main_station_2_country_label"
+            app:layout_constraintTop_toTopOf="@id/fragment_main_station_2_country_label"
+            tools:text="Country" />
+
+        <View
+            android:id="@+id/fragment_statistics_divider_2"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/divider_size"
+            android:layout_marginTop="@dimen/margin_large"
+            android:background="@color/yellow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_main_station_2_region_label" />
+
+        <Button
+            android:id="@+id/fragment_main_calculate_button"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/button_height"
+            android:layout_marginTop="@dimen/margin_large"
+            android:background="@drawable/bg_button_disabled"
+            android:enabled="false"
+            android:minWidth="@dimen/button_width"
+            android:paddingHorizontal="@dimen/margin_small"
+            android:text="@string/calculate_distance"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="@color/gray_light"
+            android:textSize="@dimen/text_small"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_statistics_divider_2" />
+
+        <TextView
+            android:id="@+id/fragment_main_distance_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_large"
+            android:gravity="center"
+            android:padding="@dimen/margin_small"
+            android:text="@string/distance_between_stations"
+            android:textColor="@color/gray_light"
+            android:textSize="@dimen/text_large"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_main_calculate_button"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/fragment_main_distance_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/margin_small"
+            android:textColor="@color/blue_light"
+            android:textSize="@dimen/text_large"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_main_distance_label"
+            tools:text="123.45 KM"
+            tools:visibility="visible" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

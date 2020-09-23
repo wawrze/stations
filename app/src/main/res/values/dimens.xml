@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="button_corner_radius">2dp</dimen>
+    <dimen name="dialog_corner_radius">5dp</dimen>
+    <dimen name="divider_size">2dp</dimen>
+
+    <dimen name="button_height">40dp</dimen>
+    <dimen name="button_width">100dp</dimen>
+
+    <dimen name="margin_large">20dp</dimen>
+    <dimen name="margin_regular">10dp</dimen>
+    <dimen name="margin_small">5dp</dimen>
+
+    <dimen name="text_large">22sp</dimen>
+    <dimen name="text_regular">18sp</dimen>
+    <dimen name="text_small">14sp</dimen>
+</resources>
