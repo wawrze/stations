@@ -31,25 +31,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/fragment_main_change_station_button_1"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/button_height"
-            android:layout_marginTop="@dimen/margin_large"
-            android:background="@drawable/bg_button_enabled"
-            android:minWidth="@dimen/button_width"
-            android:paddingHorizontal="@dimen/margin_small"
-            android:text="@string/change"
-            android:textAlignment="center"
-            android:textAllCaps="true"
-            android:textColor="@color/gray_dark"
-            android:textSize="@dimen/text_small"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fragment_main_station_1_header"
-            tools:visibility="visible" />
-
         <AutoCompleteTextView
             android:id="@+id/fragment_main_station_input_1"
             android:layout_width="0dp"
@@ -61,7 +42,7 @@
             android:inputType="text"
             android:lines="1"
             android:textAlignment="center"
-            android:textColor="@color/gray_light"
+            android:textColor="@color/gray_dark"
             android:textSize="@dimen/text_small"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -190,25 +171,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/fragment_statistics_divider_1" />
 
-        <Button
-            android:id="@+id/fragment_main_change_station_button_2"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/button_height"
-            android:layout_marginTop="@dimen/margin_large"
-            android:background="@drawable/bg_button_enabled"
-            android:minWidth="@dimen/button_width"
-            android:paddingHorizontal="@dimen/margin_small"
-            android:text="@string/change"
-            android:textAlignment="center"
-            android:textAllCaps="true"
-            android:textColor="@color/gray_dark"
-            android:textSize="@dimen/text_small"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fragment_main_station_2_header"
-            tools:visibility="visible" />
-
         <AutoCompleteTextView
             android:id="@+id/fragment_main_station_input_2"
             android:layout_width="0dp"
@@ -220,7 +182,7 @@
             android:inputType="text"
             android:lines="1"
             android:textAlignment="center"
-            android:textColor="@color/gray_light"
+            android:textColor="@color/gray_dark"
             android:textSize="@dimen/text_small"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

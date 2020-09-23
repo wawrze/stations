@@ -39,4 +39,6 @@ data class Station(
 
     @ColumnInfo(name = "localised_name")
     val localisedName: String?
-)
+) {
+    override fun toString() = name
+}

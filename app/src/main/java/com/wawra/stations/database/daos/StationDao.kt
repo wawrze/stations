@@ -26,7 +26,8 @@ abstract class StationDao {
         """
         SELECT s.*
         FROM station s
-        JOIN keyword k ON k.station_id = s.station_id AND k.keyword LIKE :text 
+        JOIN keyword k ON k.station_id = s.station_id AND k.keyword LIKE :text
+        ORDER BY s.hits DESC
         """
     )
     protected abstract fun getStationsByKeyword(text: String): Single<List<Station>>

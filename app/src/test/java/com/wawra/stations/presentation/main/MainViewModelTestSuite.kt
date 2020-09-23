@@ -26,7 +26,7 @@ class MainViewModelTestSuite : BaseTestSuite() {
     }
 
     @Test
-    fun shouldFetchStations() {
+    fun shouldFetchStations1() {
         // given
         val stations = listOf(
             Station(
@@ -60,11 +60,11 @@ class MainViewModelTestSuite : BaseTestSuite() {
         every {
             objectUnderTest.stationRepository.getStationsByKeyword("text")
         } returns Single.just(stations)
-        objectUnderTest.getMatchingStations("text")
+        objectUnderTest.getMatchingStations("text", true)
         // then
         verify { objectUnderTest.stationRepository.getStationsByKeyword("text") }
         val actionResult = objectUnderTest.getStationsResult.value
-        val resultStations = objectUnderTest.stations.value
+        val resultStations = objectUnderTest.stations1.value
         assertTrue(actionResult == true)
         assertNotNull(resultStations)
         resultStations!!
@@ -74,16 +74,79 @@ class MainViewModelTestSuite : BaseTestSuite() {
     }
 
     @Test
-    fun shouldNotFetchStations() {
+    fun shouldNotFetchStations1() {
         // when
         every {
             objectUnderTest.stationRepository.getStationsByKeyword("text")
         } returns Single.error(DataOutOfDateException())
-        objectUnderTest.getMatchingStations("text")
+        objectUnderTest.getMatchingStations("text", true)
         // then
         verify { objectUnderTest.stationRepository.getStationsByKeyword("text") }
         val actionResult = objectUnderTest.getStationsResult.value
-        val resultStations = objectUnderTest.stations.value
+        val resultStations = objectUnderTest.stations1.value
+        assertTrue(actionResult == false)
+        assertNull(resultStations)
+    }
+
+    @Test
+    fun shouldFetchStations2() {
+        // given
+        val stations = listOf(
+            Station(
+                1L,
+                "station1",
+                "station1slug",
+                0.1234,
+                5.6789,
+                21,
+                31L,
+                "city1",
+                "region1",
+                "country1",
+                "name1"
+            ),
+            Station(
+                2L,
+                "station2",
+                "station2slug",
+                9.876,
+                5.4321,
+                22,
+                32L,
+                "city2",
+                "region2",
+                "country2",
+                "name2"
+            )
+        )
+        // when
+        every {
+            objectUnderTest.stationRepository.getStationsByKeyword("text")
+        } returns Single.just(stations)
+        objectUnderTest.getMatchingStations("text", false)
+        // then
+        verify { objectUnderTest.stationRepository.getStationsByKeyword("text") }
+        val actionResult = objectUnderTest.getStationsResult.value
+        val resultStations = objectUnderTest.stations2.value
+        assertTrue(actionResult == true)
+        assertNotNull(resultStations)
+        resultStations!!
+        assertEquals(2, resultStations.size)
+        assertEquals(1L, resultStations[0].stationId)
+        assertEquals(2L, resultStations[1].stationId)
+    }
+
+    @Test
+    fun shouldNotFetchStations2() {
+        // when
+        every {
+            objectUnderTest.stationRepository.getStationsByKeyword("text")
+        } returns Single.error(DataOutOfDateException())
+        objectUnderTest.getMatchingStations("text", false)
+        // then
+        verify { objectUnderTest.stationRepository.getStationsByKeyword("text") }
+        val actionResult = objectUnderTest.getStationsResult.value
+        val resultStations = objectUnderTest.stations2.value
         assertTrue(actionResult == false)
         assertNull(resultStations)
     }

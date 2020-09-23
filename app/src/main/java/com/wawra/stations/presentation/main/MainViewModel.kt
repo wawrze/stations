@@ -14,13 +14,16 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(var stationRepository: StationRepository) :
     BaseViewModel() {
 
-    private val mStations = MutableLiveData<List<Station>>()
+    private val mStations1 = MutableLiveData<List<Station>>()
+    private val mStations2 = MutableLiveData<List<Station>>()
     private val mGetStationsResult = MutableLiveData<Boolean>()
     private val mDistance = MutableLiveData<Double>()
     private val mGetDistanceResult = MutableLiveData<Boolean>()
 
-    val stations: LiveData<List<Station>>
-        get() = mStations
+    val stations1: LiveData<List<Station>>
+        get() = mStations1
+    val stations2: LiveData<List<Station>>
+        get() = mStations2
     val getStationsResult: LiveData<Boolean>
         get() = mGetStationsResult
     val distance: LiveData<Double>
@@ -28,13 +31,13 @@ class MainViewModel @Inject constructor(var stationRepository: StationRepository
     val getDistanceResult: LiveData<Boolean>
         get() = mGetDistanceResult
 
-    fun getMatchingStations(text: String) {
+    fun getMatchingStations(text: String, forStation1: Boolean) {
         stationRepository.getStationsByKeyword(text)
             .subscribeOn(io())
             .observeOn(mainThread())
             .subscribe(
                 {
-                    mStations.postValue(it)
+                    if (forStation1) mStations1.postValue(it) else mStations2.postValue(it)
                     mGetStationsResult.postValue(true)
                 },
                 {
