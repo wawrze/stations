@@ -115,10 +115,10 @@ class MainFragment : BaseFragment() {
         fragment_main_calculate_button.apply {
             if (selectedStation1 != null && selectedStation2 != null) {
                 setBackgroundResource(R.drawable.bg_button_enabled)
-                context?.let { setTextColor(ContextCompat.getColor(it, R.color.gray_dark)) }
+                context?.let { setTextColor(ContextCompat.getColor(it, R.color.dark_grey)) }
             } else {
                 setBackgroundResource(R.drawable.bg_button_disabled)
-                context?.let { setTextColor(ContextCompat.getColor(it, R.color.gray_light)) }
+                context?.let { setTextColor(ContextCompat.getColor(it, R.color.lime)) }
                 fragment_main_distance_label.visibility = View.GONE
                 fragment_main_distance_value.visibility = View.GONE
                 fragment_main_station_icon_3.visibility = View.GONE

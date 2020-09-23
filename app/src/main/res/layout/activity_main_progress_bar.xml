@@ -29,7 +29,7 @@
         android:layout_marginTop="@dimen/margin_small"
         android:text="@string/wait_please"
         android:textAlignment="center"
-        android:textColor="@color/gray_dark"
+        android:textColor="@color/lime"
         android:textSize="@dimen/text_regular"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

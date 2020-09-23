@@ -4,8 +4,8 @@
     android:id="@+id/item_station_name"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/blue_light"
+    android:background="@color/light_grey"
     android:padding="@dimen/margin_regular"
     android:singleLine="true"
-    android:textColor="@color/gray_dark"
+    android:textColor="@color/dark_grey"
     tools:text="Station name" />
