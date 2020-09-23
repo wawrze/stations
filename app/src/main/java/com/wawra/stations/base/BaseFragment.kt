@@ -1,7 +1,5 @@
 package com.wawra.stations.base
 
-import android.content.Context
-import android.widget.Toast
 import androidx.annotation.MainThread
 import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
@@ -27,10 +25,6 @@ abstract class BaseFragment : DaggerFragment() {
             this@BaseFragment.viewLifecycleOwner,
             { action.invoke(it) }
         )
-    }
-
-    protected fun Context.showToast(res: Int) {
-        Toast.makeText(this, res, Toast.LENGTH_LONG).show()
     }
 
 }
