@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.wawra.stations"
-        minSdkVersion 19
+        minSdkVersion 18
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -71,6 +71,9 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.9.0'
+
+    // OkHttp - for API 19 compatibility
+    implementation('com.squareup.okhttp3:okhttp') { version { strictly '3.12.12' } }
 
     // unit tests
     testImplementation 'junit:junit:4.13'
