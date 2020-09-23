@@ -11,9 +11,9 @@ import io.reactivex.schedulers.Schedulers.io
 import javax.inject.Inject
 
 class StationRepository @Inject constructor(
-    var stationDao: StationDao,
-    var lastSyncTimeDao: LastSyncTimeDao,
-    var api: ApiInterface
+    private val stationDao: StationDao,
+    private val lastSyncTimeDao: LastSyncTimeDao,
+    private val api: ApiInterface
 ) {
 
     fun getStationsByKeyword(text: String) = updateDataIfNeeded()

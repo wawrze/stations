@@ -4,6 +4,7 @@ import com.wawra.stations.BaseTestSuite
 import com.wawra.stations.database.entities.Station
 import com.wawra.stations.logic.calculations.DistanceCalculator
 import com.wawra.stations.logic.errors.DataOutOfDateException
+import com.wawra.stations.logic.repositories.StationRepository
 import io.mockk.*
 import io.reactivex.Single
 import org.junit.After
@@ -13,11 +14,13 @@ import org.junit.Test
 
 class MainViewModelTestSuite : BaseTestSuite() {
 
+    private lateinit var stationRepositoryMock: StationRepository
     private lateinit var objectUnderTest: MainViewModel
 
     @Before
     fun prepare() {
-        objectUnderTest = MainViewModel(mockk())
+        stationRepositoryMock = mockk()
+        objectUnderTest = MainViewModel(stationRepositoryMock)
     }
 
     @After
@@ -58,11 +61,11 @@ class MainViewModelTestSuite : BaseTestSuite() {
         )
         // when
         every {
-            objectUnderTest.stationRepository.getStationsByKeyword("text")
+            stationRepositoryMock.getStationsByKeyword("text")
         } returns Single.just(stations)
         objectUnderTest.getMatchingStations("text", true)
         // then
-        verify { objectUnderTest.stationRepository.getStationsByKeyword("text") }
+        verify { stationRepositoryMock.getStationsByKeyword("text") }
         val dataOutOfDateError = objectUnderTest.dataOutOfDateError.value
         val unknownError = objectUnderTest.unknownError.value
         val resultStations = objectUnderTest.stations1.value
@@ -79,11 +82,11 @@ class MainViewModelTestSuite : BaseTestSuite() {
     fun shouldNotFetchStations1() {
         // when
         every {
-            objectUnderTest.stationRepository.getStationsByKeyword("text")
+            stationRepositoryMock.getStationsByKeyword("text")
         } returns Single.error(DataOutOfDateException())
         objectUnderTest.getMatchingStations("text", true)
         // then
-        verify { objectUnderTest.stationRepository.getStationsByKeyword("text") }
+        verify { stationRepositoryMock.getStationsByKeyword("text") }
         val dataOutOfDateError = objectUnderTest.dataOutOfDateError.value
         val unknownError = objectUnderTest.unknownError.value
         val resultStations = objectUnderTest.stations1.value
@@ -125,11 +128,11 @@ class MainViewModelTestSuite : BaseTestSuite() {
         )
         // when
         every {
-            objectUnderTest.stationRepository.getStationsByKeyword("text")
+            stationRepositoryMock.getStationsByKeyword("text")
         } returns Single.just(stations)
         objectUnderTest.getMatchingStations("text", false)
         // then
-        verify { objectUnderTest.stationRepository.getStationsByKeyword("text") }
+        verify { stationRepositoryMock.getStationsByKeyword("text") }
         val dataOutOfDateError = objectUnderTest.dataOutOfDateError.value
         val unknownError = objectUnderTest.unknownError.value
         val resultStations = objectUnderTest.stations2.value
@@ -146,11 +149,11 @@ class MainViewModelTestSuite : BaseTestSuite() {
     fun shouldNotFetchStations2() {
         // when
         every {
-            objectUnderTest.stationRepository.getStationsByKeyword("text")
+            stationRepositoryMock.getStationsByKeyword("text")
         } returns Single.error(DataOutOfDateException())
         objectUnderTest.getMatchingStations("text", false)
         // then
-        verify { objectUnderTest.stationRepository.getStationsByKeyword("text") }
+        verify { stationRepositoryMock.getStationsByKeyword("text") }
         val dataOutOfDateError = objectUnderTest.dataOutOfDateError.value
         val unknownError = objectUnderTest.unknownError.value
         val resultStations = objectUnderTest.stations2.value

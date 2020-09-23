@@ -13,7 +13,7 @@ import io.reactivex.schedulers.Schedulers.computation
 import io.reactivex.schedulers.Schedulers.io
 import javax.inject.Inject
 
-class MainViewModel @Inject constructor(var stationRepository: StationRepository) :
+class MainViewModel @Inject constructor(private val stationRepository: StationRepository) :
     BaseViewModel() {
 
     private val mStations1 = MutableLiveData<List<Station>>()
