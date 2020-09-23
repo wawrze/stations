@@ -15,4 +15,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/main_navigation" />
 
+    <include layout="@layout/activity_main_progress_bar" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

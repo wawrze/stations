@@ -1,6 +1,7 @@
 package com.wawra.stations.presentation
 
 import android.os.Bundle
+import android.view.View
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import com.wawra.stations.R
@@ -9,6 +10,7 @@ import com.wawra.stations.base.Navigation
 import com.wawra.stations.logic.repositories.StationRepository
 import io.reactivex.android.schedulers.AndroidSchedulers.mainThread
 import io.reactivex.schedulers.Schedulers.io
+import kotlinx.android.synthetic.main.activity_main_progress_bar.*
 import javax.inject.Inject
 
 class MainActivity : BaseActivity(), Navigation {
@@ -27,19 +29,19 @@ class MainActivity : BaseActivity(), Navigation {
     }
 
     fun updateDataIfNeeded() {
-        // TODO: show progress bar
+        activity_main_progress_bar.visibility = View.VISIBLE
         stationRepository.updateDataIfNeeded()
             .subscribeOn(io())
             .observeOn(mainThread())
             .subscribe(
                 {
-                    // TODO: hide progress bar
+                    activity_main_progress_bar.visibility = View.GONE
                     if (!it) {
                         getNavigationController().navigate(R.id.dialog_data_out_of_date)
                     }
                 },
                 {
-                    // TODO: hide progress bar
+                    activity_main_progress_bar.visibility = View.GONE
                     getNavigationController().navigate(
                         R.id.dialog_error,
                         bundleOf("message" to getString(R.string.unknown_error, 1))

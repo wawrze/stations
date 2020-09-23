@@ -18,4 +18,5 @@
     <string name="ok">OK</string>
     <string name="choose_stations_error">Pick stations first!</string>
     <string name="unknown_error">An unknown error has occurred! Error code: %d</string>
+    <string name="wait_please">Wait please…</string>
 </resources>
