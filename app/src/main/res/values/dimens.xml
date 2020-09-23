@@ -10,6 +10,7 @@
     <dimen name="button_height">40dp</dimen>
     <dimen name="button_width">100dp</dimen>
 
+    <dimen name="margin_double_large">30dp</dimen>
     <dimen name="margin_large">15dp</dimen>
     <dimen name="margin_regular">10dp</dimen>
     <dimen name="margin_small">5dp</dimen>
