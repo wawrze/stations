@@ -11,4 +11,5 @@
     <string name="country">Country:</string>
     <string name="calculate_distance">Calculate distance</string>
     <string name="distance_between_stations">Distance between stations:</string>
+    <string name="distance_value">%.2f KM</string>
 </resources>

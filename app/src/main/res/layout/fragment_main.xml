@@ -11,13 +11,6 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/margin_large">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/fragment_main_guideline"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5" />
-
         <TextView
             android:id="@+id/fragment_main_station_1_header"
             android:layout_width="0dp"
@@ -27,6 +20,7 @@
             android:text="@string/station_1"
             android:textColor="@color/gray_light"
             android:textSize="@dimen/text_large"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -57,7 +51,7 @@
             android:text="@string/name"
             android:textColor="@color/gray_light"
             android:textSize="@dimen/text_regular"
-            app:layout_constraintEnd_toEndOf="@id/fragment_main_station_1_region_label"
+            app:layout_constraintEnd_toEndOf="@id/fragment_main_station_1_country_label"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/fragment_main_station_input_1" />
 
@@ -81,7 +75,7 @@
             android:text="@string/city"
             android:textColor="@color/gray_light"
             android:textSize="@dimen/text_regular"
-            app:layout_constraintEnd_toEndOf="@id/fragment_main_station_1_region_label"
+            app:layout_constraintEnd_toEndOf="@id/fragment_main_station_1_country_label"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/fragment_main_station_1_name_value" />
 
@@ -105,6 +99,7 @@
             android:text="@string/region"
             android:textColor="@color/gray_light"
             android:textSize="@dimen/text_regular"
+            app:layout_constraintEnd_toEndOf="@id/fragment_main_station_1_country_label"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/fragment_main_station_1_city_value" />
 
@@ -116,7 +111,7 @@
             android:padding="@dimen/margin_small"
             android:textColor="@color/blue_light"
             android:textSize="@dimen/text_regular"
-            app:layout_constraintEnd_toEndOf="@id/fragment_main_guideline"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/fragment_main_station_1_region_label"
             app:layout_constraintTop_toTopOf="@id/fragment_main_station_1_region_label"
             tools:text="Region" />
@@ -129,15 +124,13 @@
             android:text="@string/country"
             android:textColor="@color/gray_light"
             android:textSize="@dimen/text_regular"
-            app:layout_constraintBottom_toBottomOf="@id/fragment_main_station_1_region_label"
-            app:layout_constraintStart_toStartOf="@id/fragment_main_guideline"
-            app:layout_constraintTop_toTopOf="@id/fragment_main_station_1_region_label" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_main_station_1_region_label" />
 
         <TextView
             android:id="@+id/fragment_main_station_1_country_value"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_small"
             android:padding="@dimen/margin_small"
             android:textColor="@color/blue_light"
             android:textSize="@dimen/text_regular"
@@ -155,7 +148,7 @@
             android:background="@color/yellow"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fragment_main_station_1_region_label" />
+            app:layout_constraintTop_toBottomOf="@id/fragment_main_station_1_country_label" />
 
         <TextView
             android:id="@+id/fragment_main_station_2_header"
@@ -167,6 +160,7 @@
             android:text="@string/station_2"
             android:textColor="@color/gray_light"
             android:textSize="@dimen/text_large"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/fragment_statistics_divider_1" />
@@ -197,7 +191,7 @@
             android:text="@string/name"
             android:textColor="@color/gray_light"
             android:textSize="@dimen/text_regular"
-            app:layout_constraintEnd_toEndOf="@id/fragment_main_station_2_region_label"
+            app:layout_constraintEnd_toEndOf="@id/fragment_main_station_2_country_label"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/fragment_main_station_input_2" />
 
@@ -221,7 +215,7 @@
             android:text="@string/city"
             android:textColor="@color/gray_light"
             android:textSize="@dimen/text_regular"
-            app:layout_constraintEnd_toEndOf="@id/fragment_main_station_2_region_label"
+            app:layout_constraintEnd_toEndOf="@id/fragment_main_station_2_country_label"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/fragment_main_station_2_name_value" />
 
@@ -245,6 +239,7 @@
             android:text="@string/region"
             android:textColor="@color/gray_light"
             android:textSize="@dimen/text_regular"
+            app:layout_constraintEnd_toEndOf="@id/fragment_main_station_2_country_label"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/fragment_main_station_2_city_value" />
 
@@ -256,7 +251,7 @@
             android:padding="@dimen/margin_small"
             android:textColor="@color/blue_light"
             android:textSize="@dimen/text_regular"
-            app:layout_constraintEnd_toEndOf="@id/fragment_main_guideline"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/fragment_main_station_2_region_label"
             app:layout_constraintTop_toTopOf="@id/fragment_main_station_2_region_label"
             tools:text="Region" />
@@ -269,15 +264,13 @@
             android:text="@string/country"
             android:textColor="@color/gray_light"
             android:textSize="@dimen/text_regular"
-            app:layout_constraintBottom_toBottomOf="@id/fragment_main_station_2_region_label"
-            app:layout_constraintStart_toStartOf="@id/fragment_main_guideline"
-            app:layout_constraintTop_toTopOf="@id/fragment_main_station_2_region_label" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_main_station_2_region_label" />
 
         <TextView
             android:id="@+id/fragment_main_station_2_country_value"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_small"
             android:padding="@dimen/margin_small"
             android:textColor="@color/blue_light"
             android:textSize="@dimen/text_regular"
@@ -294,7 +287,7 @@
             android:background="@color/yellow"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fragment_main_station_2_region_label" />
+            app:layout_constraintTop_toBottomOf="@id/fragment_main_station_2_country_label" />
 
         <Button
             android:id="@+id/fragment_main_calculate_button"

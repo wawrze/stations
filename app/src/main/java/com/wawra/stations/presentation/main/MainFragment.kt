@@ -1,16 +1,20 @@
 package com.wawra.stations.presentation.main
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.AutoCompleteTextView
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.wawra.stations.R
 import com.wawra.stations.base.BaseFragment
 import com.wawra.stations.base.ViewModelProviderFactory
+import com.wawra.stations.database.entities.Station
 import kotlinx.android.synthetic.main.fragment_main.*
 import java.util.*
 import javax.inject.Inject
@@ -22,6 +26,8 @@ class MainFragment : BaseFragment() {
     private lateinit var viewModel: MainViewModel
     private lateinit var station1Adapter: AutoCompleteAdapter
     private lateinit var station2Adapter: AutoCompleteAdapter
+    private var selectedStation1: Station? = null
+    private var selectedStation2: Station? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,7 +42,13 @@ class MainFragment : BaseFragment() {
         super.onResume()
         setupAdapters()
         setupObservers()
-        view?.clearFocus()
+        setupButtons()
+        closeKeyboard()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        closeKeyboard()
     }
 
     private fun setupAdapters() {
@@ -49,8 +61,9 @@ class MainFragment : BaseFragment() {
     }
 
     private fun setupAutoCompleteTextView(view: AutoCompleteTextView, forStation1: Boolean) {
+        val adapter = if (forStation1) station1Adapter else station2Adapter
         view.apply {
-            setAdapter(if (forStation1) station1Adapter else station2Adapter)
+            setAdapter(adapter)
             threshold = 2
             onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
                 if (hasFocus) showDropDown() else dismissDropDown()
@@ -68,10 +81,57 @@ class MainFragment : BaseFragment() {
                 }
 
                 override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                    if (forStation1) selectedStation1 = null else selectedStation2 = null
+                    bindStationsData()
                     // TODO: show progress bar
                     viewModel.getMatchingStations(s.toString(), forStation1)
                 }
             })
+            setOnItemClickListener { _, _, position, _ ->
+                closeKeyboard()
+                val station = adapter.getItem(position)
+                if (forStation1) selectedStation1 = station else selectedStation2 = station
+                bindStationsData()
+            }
+        }
+    }
+
+    private fun bindStationsData() {
+        fragment_main_station_1_name_value.text = selectedStation1?.name.orEmpty()
+        fragment_main_station_1_city_value.text = selectedStation1?.city.orEmpty()
+        fragment_main_station_1_region_value.text = selectedStation1?.region.orEmpty()
+        fragment_main_station_1_country_value.text = selectedStation1?.country.orEmpty()
+
+        fragment_main_station_2_name_value.text = selectedStation2?.name.orEmpty()
+        fragment_main_station_2_city_value.text = selectedStation2?.city.orEmpty()
+        fragment_main_station_2_region_value.text = selectedStation2?.region.orEmpty()
+        fragment_main_station_2_country_value.text = selectedStation2?.country.orEmpty()
+
+        fragment_main_calculate_button.apply {
+            if (selectedStation1 != null && selectedStation2 != null) {
+                isEnabled = true
+                setBackgroundResource(R.drawable.bg_button_enabled)
+                context?.let { setTextColor(ContextCompat.getColor(it, R.color.gray_dark)) }
+            } else {
+                isEnabled = false
+                setBackgroundResource(R.drawable.bg_button_disabled)
+                context?.let { setTextColor(ContextCompat.getColor(it, R.color.gray_light)) }
+                fragment_main_distance_label.visibility = View.GONE
+                fragment_main_distance_value.visibility = View.GONE
+            }
+        }
+    }
+
+    private fun setupButtons() {
+        fragment_main_calculate_button.setOnClickListener {
+            if (fragment_main_calculate_button.isEnabled) {
+                viewModel.getDistance(
+                    selectedStation1 ?: return@setOnClickListener,
+                    selectedStation2 ?: return@setOnClickListener
+                )
+            } else {
+                // TODO: show error message (choose stations first)
+            }
         }
     }
 
@@ -84,7 +144,17 @@ class MainFragment : BaseFragment() {
             station2Adapter.clear()
             station2Adapter.addAll(it)
         }
-        // TODO: observe get stations result, hide progress bar, show error message if needed
+        viewModel.distance.observe {
+            fragment_main_distance_value.text = getString(R.string.distance_value, it)
+            fragment_main_distance_label.visibility = View.VISIBLE
+            fragment_main_distance_value.visibility = View.VISIBLE
+        }
+        // TODO: observe results, hide progress bar, show error message if needed
+    }
+
+    private fun closeKeyboard() {
+        val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+        imm?.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
     }
 
 }

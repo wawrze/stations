@@ -10,6 +10,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers.mainThread
 import io.reactivex.schedulers.Schedulers.computation
 import io.reactivex.schedulers.Schedulers.io
 import javax.inject.Inject
+import kotlin.math.round
 
 class MainViewModel @Inject constructor(var stationRepository: StationRepository) :
     BaseViewModel() {
@@ -57,6 +58,7 @@ class MainViewModel @Inject constructor(var stationRepository: StationRepository
             .observeOn(mainThread())
             .subscribe(
                 {
+                    val rounded = (it * 100).toInt() / 100.0 // TODO: refactor
                     mDistance.postValue(it)
                     mGetDistanceResult.postValue(true)
                 },
