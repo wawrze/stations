@@ -4,7 +4,7 @@ import com.wawra.stations.database.daos.LastSyncTimeDao
 import com.wawra.stations.database.daos.StationDao
 import com.wawra.stations.database.entities.Keyword
 import com.wawra.stations.database.entities.Station
-import com.wawra.stations.logic.exceptions.DataOutOfDateException
+import com.wawra.stations.logic.errors.DataOutOfDateException
 import com.wawra.stations.network.ApiInterface
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers.io

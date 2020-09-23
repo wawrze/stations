@@ -3,7 +3,7 @@ package com.wawra.stations.logic.repositories
 import com.wawra.stations.BaseTestSuite
 import com.wawra.stations.database.entities.Keyword
 import com.wawra.stations.database.entities.Station
-import com.wawra.stations.logic.exceptions.DataOutOfDateException
+import com.wawra.stations.logic.errors.DataOutOfDateException
 import com.wawra.stations.network.models.KeywordResponse
 import com.wawra.stations.network.models.StationResponse
 import io.mockk.every

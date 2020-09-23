@@ -3,7 +3,7 @@ package com.wawra.stations.presentation.main
 import com.wawra.stations.BaseTestSuite
 import com.wawra.stations.database.entities.Station
 import com.wawra.stations.logic.calculations.DistanceCalculator
-import com.wawra.stations.logic.exceptions.DataOutOfDateException
+import com.wawra.stations.logic.errors.DataOutOfDateException
 import io.mockk.*
 import io.reactivex.Single
 import org.junit.After
@@ -63,9 +63,11 @@ class MainViewModelTestSuite : BaseTestSuite() {
         objectUnderTest.getMatchingStations("text", true)
         // then
         verify { objectUnderTest.stationRepository.getStationsByKeyword("text") }
-        val actionResult = objectUnderTest.getStationsResult.value
+        val dataOutOfDateError = objectUnderTest.dataOutOfDateError.value
+        val unknownError = objectUnderTest.unknownError.value
         val resultStations = objectUnderTest.stations1.value
-        assertTrue(actionResult == true)
+        assertNull(dataOutOfDateError)
+        assertNull(unknownError)
         assertNotNull(resultStations)
         resultStations!!
         assertEquals(2, resultStations.size)
@@ -82,9 +84,11 @@ class MainViewModelTestSuite : BaseTestSuite() {
         objectUnderTest.getMatchingStations("text", true)
         // then
         verify { objectUnderTest.stationRepository.getStationsByKeyword("text") }
-        val actionResult = objectUnderTest.getStationsResult.value
+        val dataOutOfDateError = objectUnderTest.dataOutOfDateError.value
+        val unknownError = objectUnderTest.unknownError.value
         val resultStations = objectUnderTest.stations1.value
-        assertTrue(actionResult == false)
+        assertTrue(dataOutOfDateError == true)
+        assertNull(unknownError)
         assertNull(resultStations)
     }
 
@@ -126,9 +130,11 @@ class MainViewModelTestSuite : BaseTestSuite() {
         objectUnderTest.getMatchingStations("text", false)
         // then
         verify { objectUnderTest.stationRepository.getStationsByKeyword("text") }
-        val actionResult = objectUnderTest.getStationsResult.value
+        val dataOutOfDateError = objectUnderTest.dataOutOfDateError.value
+        val unknownError = objectUnderTest.unknownError.value
         val resultStations = objectUnderTest.stations2.value
-        assertTrue(actionResult == true)
+        assertNull(dataOutOfDateError)
+        assertNull(unknownError)
         assertNotNull(resultStations)
         resultStations!!
         assertEquals(2, resultStations.size)
@@ -145,9 +151,11 @@ class MainViewModelTestSuite : BaseTestSuite() {
         objectUnderTest.getMatchingStations("text", false)
         // then
         verify { objectUnderTest.stationRepository.getStationsByKeyword("text") }
-        val actionResult = objectUnderTest.getStationsResult.value
+        val dataOutOfDateError = objectUnderTest.dataOutOfDateError.value
+        val unknownError = objectUnderTest.unknownError.value
         val resultStations = objectUnderTest.stations2.value
-        assertTrue(actionResult == false)
+        assertTrue(dataOutOfDateError == true)
+        assertNull(unknownError)
         assertNull(resultStations)
     }
 
@@ -188,9 +196,11 @@ class MainViewModelTestSuite : BaseTestSuite() {
         objectUnderTest.getDistance(station1, station2)
         // then
         verify { DistanceCalculator.calculateDistanceInKm(0.1234, 5.6789, 9.876, 5.4321) }
-        val actionResult = objectUnderTest.getDistanceResult.value
+        val dataOutOfDateError = objectUnderTest.dataOutOfDateError.value
+        val unknownError = objectUnderTest.unknownError.value
         val resultDistance = objectUnderTest.distance.value
-        assertTrue(actionResult == true)
+        assertNull(dataOutOfDateError)
+        assertNull(unknownError)
         assertEquals(123.45, resultDistance ?: 0.0, 0.0)
         // clean up
         unmockkAll()
@@ -233,9 +243,11 @@ class MainViewModelTestSuite : BaseTestSuite() {
         objectUnderTest.getDistance(station1, station2)
         // then
         verify { DistanceCalculator.calculateDistanceInKm(0.1234, 5.6789, 9.876, 5.4321) }
-        val actionResult = objectUnderTest.getDistanceResult.value
+        val dataOutOfDateError = objectUnderTest.dataOutOfDateError.value
+        val unknownError = objectUnderTest.unknownError.value
         val resultDistance = objectUnderTest.distance.value
-        assertTrue(actionResult == false)
+        assertNull(dataOutOfDateError)
+        assertEquals(3, unknownError)
         assertNull(resultDistance)
         // clean up
         unmockkAll()

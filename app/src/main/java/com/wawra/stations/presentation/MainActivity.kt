@@ -7,6 +7,7 @@ import androidx.navigation.findNavController
 import com.wawra.stations.R
 import com.wawra.stations.base.BaseActivity
 import com.wawra.stations.base.Navigation
+import com.wawra.stations.logic.errors.ErrorCodes
 import com.wawra.stations.logic.repositories.StationRepository
 import io.reactivex.android.schedulers.AndroidSchedulers.mainThread
 import io.reactivex.schedulers.Schedulers.io
@@ -44,7 +45,11 @@ class MainActivity : BaseActivity(), Navigation {
                     activity_main_progress_bar.visibility = View.GONE
                     getNavigationController().navigate(
                         R.id.dialog_error,
-                        bundleOf("message" to getString(R.string.unknown_error, 1))
+                        bundleOf(
+                            "message" to getString(
+                                R.string.unknown_error, ErrorCodes.UPDATE_DATA_MAIN_ACTIVITY.code
+                            )
+                        )
                     )
                 }
             )

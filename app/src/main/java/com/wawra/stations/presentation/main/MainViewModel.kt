@@ -5,7 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import com.wawra.stations.base.BaseViewModel
 import com.wawra.stations.database.entities.Station
 import com.wawra.stations.logic.calculations.DistanceCalculator
-import com.wawra.stations.logic.exceptions.DataOutOfDateException
+import com.wawra.stations.logic.errors.DataOutOfDateException
+import com.wawra.stations.logic.errors.ErrorCodes
 import com.wawra.stations.logic.repositories.StationRepository
 import io.reactivex.android.schedulers.AndroidSchedulers.mainThread
 import io.reactivex.schedulers.Schedulers.computation
@@ -37,16 +38,12 @@ class MainViewModel @Inject constructor(var stationRepository: StationRepository
             .subscribeOn(io())
             .observeOn(mainThread())
             .subscribe(
+                { if (forStation1) mStations1.postValue(it) else mStations2.postValue(it) },
                 {
-                    println(">>>>>>>>>>>> fetched ${it.size} stations")
-                    if (forStation1) mStations1.postValue(it) else mStations2.postValue(it)
-                },
-                {
-                    println(">>>>>>>>>>>> fetch stations error")
                     if (it is DataOutOfDateException) {
                         mDataOutOfDateError.postValue(true)
                     } else {
-                        mUnknownError.postValue(2)
+                        mUnknownError.postValue(ErrorCodes.GET_STATIONS_MAIN_VIEW_MODEL.code)
                     }
                 }
             )
@@ -63,7 +60,7 @@ class MainViewModel @Inject constructor(var stationRepository: StationRepository
             .observeOn(mainThread())
             .subscribe(
                 { mDistance.postValue(it) },
-                { mUnknownError.postValue(3) }
+                { mUnknownError.postValue(ErrorCodes.CALCULATE_DISTANCE.code) }
             )
             .addToDisposables()
     }

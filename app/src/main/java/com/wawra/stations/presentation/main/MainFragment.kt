@@ -112,6 +112,10 @@ class MainFragment : BaseFragment() {
                 context?.let { setTextColor(ContextCompat.getColor(it, R.color.gray_light)) }
                 fragment_main_distance_label.visibility = View.GONE
                 fragment_main_distance_value.visibility = View.GONE
+                fragment_main_station_icon_3.visibility = View.GONE
+                fragment_main_station_icon_4.visibility = View.GONE
+                fragment_main_station_arrow_left.visibility = View.GONE
+                fragment_main_station_arrow_right.visibility = View.GONE
             }
         }
     }
@@ -146,6 +150,10 @@ class MainFragment : BaseFragment() {
             fragment_main_distance_value.text = getString(R.string.distance_value, it)
             fragment_main_distance_label.visibility = View.VISIBLE
             fragment_main_distance_value.visibility = View.VISIBLE
+            fragment_main_station_icon_3.visibility = View.VISIBLE
+            fragment_main_station_icon_4.visibility = View.VISIBLE
+            fragment_main_station_arrow_left.visibility = View.VISIBLE
+            fragment_main_station_arrow_right.visibility = View.VISIBLE
         }
         viewModel.dataOutOfDateError.observe {
             activity_main_progress_bar?.visibility = View.GONE
