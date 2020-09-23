@@ -33,6 +33,9 @@ class MainViewModel @Inject constructor(var stationRepository: StationRepository
     val unknownError: LiveData<Int>
         get() = mUnknownError
 
+    var selectedStation1: Station? = null
+    var selectedStation2: Station? = null
+
     fun getMatchingStations(text: String, forStation1: Boolean) {
         stationRepository.getStationsByKeyword(text)
             .subscribeOn(io())

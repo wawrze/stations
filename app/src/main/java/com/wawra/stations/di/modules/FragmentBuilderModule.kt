@@ -1,8 +1,8 @@
 package com.wawra.stations.di.modules
 
 import com.wawra.stations.di.scopes.FragmentScoped
-import com.wawra.stations.presentation.DataOutOfDateDialogFragment
-import com.wawra.stations.presentation.ErrorDialogFragment
+import com.wawra.stations.presentation.dialogs.DataOutOfDateDialogFragment
+import com.wawra.stations.presentation.dialogs.ErrorDialogFragment
 import com.wawra.stations.presentation.main.MainFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector

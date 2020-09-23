@@ -29,12 +29,12 @@
 
     <dialog
         android:id="@+id/dialog_data_out_of_date"
-        android:name="com.wawra.stations.presentation.DataOutOfDateDialogFragment"
+        android:name="com.wawra.stations.presentation.dialogs.DataOutOfDateDialogFragment"
         android:label="DataOutOfDateDialogFragment" />
 
     <dialog
         android:id="@+id/dialog_error"
-        android:name="com.wawra.stations.presentation.ErrorDialogFragment"
+        android:name="com.wawra.stations.presentation.dialogs.ErrorDialogFragment"
         android:label="ErrorDialogFragment">
 
         <argument

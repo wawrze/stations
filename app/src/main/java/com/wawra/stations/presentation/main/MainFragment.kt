@@ -27,8 +27,8 @@ class MainFragment : BaseFragment() {
     private lateinit var viewModel: MainViewModel
     private lateinit var station1Adapter: AutoCompleteAdapter
     private lateinit var station2Adapter: AutoCompleteAdapter
-    private var selectedStation1: Station? = null // TODO: save on orientation change
-    private var selectedStation2: Station? = null // TODO: save on orientation change
+    private var selectedStation1: Station? = null
+    private var selectedStation2: Station? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,7 +36,15 @@ class MainFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
+        viewModel.selectedStation1?.let { selectedStation1 = it }
+        viewModel.selectedStation2?.let { selectedStation2 = it }
         return inflater.inflate(R.layout.fragment_main, container, false)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        viewModel.selectedStation1 = selectedStation1
+        viewModel.selectedStation2 = selectedStation2
     }
 
     override fun onResume() {
@@ -45,6 +53,7 @@ class MainFragment : BaseFragment() {
         setupObservers()
         setupButtons()
         closeKeyboard()
+        bindStationsData()
     }
 
     override fun onPause() {

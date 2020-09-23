@@ -1,4 +1,4 @@
-package com.wawra.stations.presentation
+package com.wawra.stations.presentation.dialogs
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.wawra.stations.R
 import com.wawra.stations.base.BaseDialog
+import com.wawra.stations.presentation.MainActivity
 import kotlinx.android.synthetic.main.dialog_data_out_of_date.*
 
 class DataOutOfDateDialogFragment : BaseDialog() {

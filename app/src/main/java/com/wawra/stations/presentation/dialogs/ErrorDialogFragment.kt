@@ -1,4 +1,4 @@
-package com.wawra.stations.presentation
+package com.wawra.stations.presentation.dialogs
 
 import android.os.Bundle
 import android.view.LayoutInflater
