@@ -15,7 +15,7 @@
     <string name="retry">Ponów</string>
     <string name="cancel">Anuluj</string>
     <string name="ok">OK</string>
-    <string name="choose_stations_error">Najpierw wybierz stacje!</string>
+    <string name="choose_stations_error">Najpierw wybierz stację!</string>
     <string name="unknown_error">Wystąpił nieznany błąd! Kod błędu: %d</string>
     <string name="wait_please">Proszę czekać…</string>
     <string name="arrow_left"><![CDATA[<]]>-</string>

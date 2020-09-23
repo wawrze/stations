@@ -163,6 +163,7 @@ class MainFragment : BaseFragment() {
             fragment_main_station_icon_4.visibility = View.VISIBLE
             fragment_main_station_arrow_left.visibility = View.VISIBLE
             fragment_main_station_arrow_right.visibility = View.VISIBLE
+            fragment_main_scroll_view.apply { post { fullScroll(View.FOCUS_DOWN) } }
         }
         viewModel.dataOutOfDateError.observe {
             activity_main_progress_bar?.visibility = View.GONE
