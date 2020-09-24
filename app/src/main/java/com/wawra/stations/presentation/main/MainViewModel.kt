@@ -7,6 +7,7 @@ import com.wawra.stations.database.entities.Station
 import com.wawra.stations.logic.calculations.DistanceCalculator
 import com.wawra.stations.logic.errors.DataOutOfDateException
 import com.wawra.stations.logic.errors.ErrorCodes
+import com.wawra.stations.logic.fix
 import com.wawra.stations.logic.repositories.StationRepository
 import io.reactivex.android.schedulers.AndroidSchedulers.mainThread
 import io.reactivex.schedulers.Schedulers.computation
@@ -37,7 +38,7 @@ class MainViewModel @Inject constructor(private val stationRepository: StationRe
     var selectedStation2: Station? = null
 
     fun getMatchingStations(text: String, forStation1: Boolean) {
-        stationRepository.getStationsByKeyword(text)
+        stationRepository.getStationsByKeyword(text.fix())
             .subscribeOn(io())
             .observeOn(mainThread())
             .subscribe(

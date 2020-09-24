@@ -76,7 +76,11 @@ class MainFragment : BaseFragment() {
             setAdapter(adapter)
             threshold = 2
             onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
-                if (hasFocus && !adapter.isEmpty) showDropDown() else dismissDropDown()
+                if (hasFocus && !adapter.isEmpty) {
+                    showDropDown()
+                } else {
+                    dismissDropDown()
+                }
             }
             addTextChangedListener(object : TextWatcher {
                 override fun afterTextChanged(s: Editable) {}
@@ -86,7 +90,7 @@ class MainFragment : BaseFragment() {
                 override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                     if (forStation1) selectedStation1 = null else selectedStation2 = null
                     bindStationsData()
-                    if (s.toString().length > 1) {
+                    if (s.length > 1) {
                         activity_main_progress_bar?.visibility = View.VISIBLE
                         viewModel.getMatchingStations(s.toString(), forStation1)
                     }
@@ -97,6 +101,7 @@ class MainFragment : BaseFragment() {
                 val station = adapter.getItem(position)
                 if (forStation1) selectedStation1 = station else selectedStation2 = station
                 bindStationsData()
+                view.dismissDropDown()
             }
         }
     }
@@ -149,13 +154,17 @@ class MainFragment : BaseFragment() {
             station1Adapter.clear()
             station1Adapter.addAll(it)
             activity_main_progress_bar?.visibility = View.GONE
-            if (!station1Adapter.isEmpty) fragment_main_station_input_1.showDropDown()
+            if (!station1Adapter.isEmpty && selectedStation1 == null) {
+                fragment_main_station_input_1.showDropDown()
+            }
         }
         viewModel.stations2.observe {
             station2Adapter.clear()
             station2Adapter.addAll(it)
             activity_main_progress_bar?.visibility = View.GONE
-            if (!station2Adapter.isEmpty) fragment_main_station_input_2.showDropDown()
+            if (!station2Adapter.isEmpty && selectedStation2 == null) {
+                fragment_main_station_input_2.showDropDown()
+            }
         }
         viewModel.distance.observe {
             fragment_main_distance_value.text = getString(R.string.distance_value, it)

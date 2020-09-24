@@ -61,11 +61,11 @@ class MainViewModelTestSuite : BaseTestSuite() {
         )
         // when
         every {
-            stationRepositoryMock.getStationsByKeyword("text")
+            stationRepositoryMock.getStationsByKeyword("TEXT")
         } returns Single.just(stations)
         objectUnderTest.getMatchingStations("text", true)
         // then
-        verify { stationRepositoryMock.getStationsByKeyword("text") }
+        verify { stationRepositoryMock.getStationsByKeyword("TEXT") }
         val dataOutOfDateError = objectUnderTest.dataOutOfDateError.value
         val unknownError = objectUnderTest.unknownError.value
         val resultStations = objectUnderTest.stations1.value
@@ -82,11 +82,11 @@ class MainViewModelTestSuite : BaseTestSuite() {
     fun shouldNotFetchStations1() {
         // when
         every {
-            stationRepositoryMock.getStationsByKeyword("text")
+            stationRepositoryMock.getStationsByKeyword("TEXT")
         } returns Single.error(DataOutOfDateException())
         objectUnderTest.getMatchingStations("text", true)
         // then
-        verify { stationRepositoryMock.getStationsByKeyword("text") }
+        verify { stationRepositoryMock.getStationsByKeyword("TEXT") }
         val dataOutOfDateError = objectUnderTest.dataOutOfDateError.value
         val unknownError = objectUnderTest.unknownError.value
         val resultStations = objectUnderTest.stations1.value
@@ -128,11 +128,11 @@ class MainViewModelTestSuite : BaseTestSuite() {
         )
         // when
         every {
-            stationRepositoryMock.getStationsByKeyword("text")
+            stationRepositoryMock.getStationsByKeyword("TEXT")
         } returns Single.just(stations)
         objectUnderTest.getMatchingStations("text", false)
         // then
-        verify { stationRepositoryMock.getStationsByKeyword("text") }
+        verify { stationRepositoryMock.getStationsByKeyword("TEXT") }
         val dataOutOfDateError = objectUnderTest.dataOutOfDateError.value
         val unknownError = objectUnderTest.unknownError.value
         val resultStations = objectUnderTest.stations2.value
@@ -149,11 +149,11 @@ class MainViewModelTestSuite : BaseTestSuite() {
     fun shouldNotFetchStations2() {
         // when
         every {
-            stationRepositoryMock.getStationsByKeyword("text")
+            stationRepositoryMock.getStationsByKeyword("TEXT")
         } returns Single.error(DataOutOfDateException())
         objectUnderTest.getMatchingStations("text", false)
         // then
-        verify { stationRepositoryMock.getStationsByKeyword("text") }
+        verify { stationRepositoryMock.getStationsByKeyword("TEXT") }
         val dataOutOfDateError = objectUnderTest.dataOutOfDateError.value
         val unknownError = objectUnderTest.unknownError.value
         val resultStations = objectUnderTest.stations2.value

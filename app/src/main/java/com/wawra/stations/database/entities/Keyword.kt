@@ -2,9 +2,10 @@ package com.wawra.stations.database.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "keyword")
+@Entity(tableName = "keyword", indices = [Index(value = ["keyword"])])
 data class Keyword(
     @PrimaryKey
     @ColumnInfo(name = "keyword_id")
