@@ -76,7 +76,7 @@ class MainFragment : BaseFragment() {
             setAdapter(adapter)
             threshold = 2
             onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
-                if (hasFocus) showDropDown() else dismissDropDown()
+                if (hasFocus && !adapter.isEmpty) showDropDown() else dismissDropDown()
             }
             addTextChangedListener(object : TextWatcher {
                 override fun afterTextChanged(s: Editable) {}
@@ -149,11 +149,13 @@ class MainFragment : BaseFragment() {
             station1Adapter.clear()
             station1Adapter.addAll(it)
             activity_main_progress_bar?.visibility = View.GONE
+            if (!station1Adapter.isEmpty) fragment_main_station_input_1.showDropDown()
         }
         viewModel.stations2.observe {
             station2Adapter.clear()
             station2Adapter.addAll(it)
             activity_main_progress_bar?.visibility = View.GONE
+            if (!station2Adapter.isEmpty) fragment_main_station_input_2.showDropDown()
         }
         viewModel.distance.observe {
             fragment_main_distance_value.text = getString(R.string.distance_value, it)

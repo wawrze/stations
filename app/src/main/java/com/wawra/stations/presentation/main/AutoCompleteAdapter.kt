@@ -10,6 +10,7 @@ import android.widget.Filterable
 import android.widget.TextView
 import com.wawra.stations.R
 import com.wawra.stations.database.entities.Station
+import com.wawra.stations.logic.fix
 import java.util.*
 
 class AutoCompleteAdapter(context: Context, stations: List<Station>) :
@@ -23,9 +24,9 @@ class AutoCompleteAdapter(context: Context, stations: List<Station>) :
         override fun performFiltering(constraint: CharSequence): FilterResults {
             val filterResults = FilterResults()
             suggestions.clear()
-            val fixedConstraint = constraint.toString().toUpperCase(Locale.getDefault())
+            val fixedConstraint = constraint.toString().fix()
             for (station in stations) {
-                val fixedStationName = station.toString().toUpperCase(Locale.getDefault())
+                val fixedStationName = station.toString().fix()
                 if (fixedStationName.contains(fixedConstraint)) suggestions.add(station)
             }
             filterResults.values = suggestions

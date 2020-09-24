@@ -8,6 +8,7 @@ import com.wawra.stations.R
 import com.wawra.stations.base.BaseActivity
 import com.wawra.stations.base.Navigation
 import com.wawra.stations.logic.errors.ErrorCodes
+import com.wawra.stations.logic.fix
 import com.wawra.stations.logic.repositories.StationRepository
 import io.reactivex.android.schedulers.AndroidSchedulers.mainThread
 import io.reactivex.schedulers.Schedulers.io
@@ -21,6 +22,11 @@ class MainActivity : BaseActivity(), Navigation {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val string = "ąĘłÓźż asdf GHJK öšáŠýš"
+        println(">>>>>>>>>>>>>>>>>>>>> $string")
+        println(">>>>>>>>>>>>>>>>>>>>> ${string.fix()}")
+
         setContentView(R.layout.activity_main)
     }
 
@@ -37,9 +43,7 @@ class MainActivity : BaseActivity(), Navigation {
             .subscribe(
                 {
                     activity_main_progress_bar.visibility = View.GONE
-                    if (!it) {
-                        getNavigationController().navigate(R.id.dialog_data_out_of_date)
-                    }
+                    if (!it) getNavigationController().navigate(R.id.dialog_data_out_of_date)
                 },
                 {
                     activity_main_progress_bar.visibility = View.GONE
